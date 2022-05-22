@@ -1,0 +1,26 @@
+import React from 'react';
+import useTools from '../../hooks/useTools';
+import Tool from '../Tool/Tool';
+
+const Tools = ({ showAll = true }) => {
+    const [tools] = useTools();
+    let showTools;
+    showAll ? showTools = tools : showTools = tools?.slice(0, 6);
+    return (
+        <div className='container mx-auto my-5'>
+            <h2 className="display-6 text-center">Tools</h2>
+            <div className="row gap-3">
+                {
+                    showTools.map(showTool =>
+                        < Tool
+                            key={showTool._id}
+                            showTool={showTool}
+                        ></Tool>
+                    )
+                }
+            </div>
+        </div>
+    );
+};
+
+export default Tools;

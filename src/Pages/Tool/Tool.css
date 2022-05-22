@@ -1,0 +1,9 @@
+.card-width {
+    width: 32% !important;
+}
+
+@media only screen and (max-width: 992px) {
+    .card-width {
+        width: 100% !important;
+    }
+}
