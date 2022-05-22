@@ -1,0 +1,9 @@
+.not-found-img {
+    width: 50%;
+}
+
+@media only screen and (max-width: 992px) {
+    .not-found-img {
+        width: 90%;
+    }
+}
