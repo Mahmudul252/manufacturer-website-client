@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './Pages/Home/Home';
 import NotFound from './Pages/NotFound/NotFound';
+import Footer from './Pages/Shared/Footer';
 import Header from './Pages/Shared/Header';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
 
         <Route path='*' element={<NotFound />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
