@@ -6,7 +6,7 @@ import './Tool.css';
 const Tool = ({ showTool }) => {
     const { _id, img, name, description, minimumOrderQuantity, availableQuantity, unitPrice } = showTool;
     return (
-        <Card className='col col-lg-4 col-12 shadow border-0 card-width'>
+        <Card className='col col-lg-4 col-12 shadow-lg border-0 card-width'>
             <Card.Img className='rounded-3 shadow-sm mt-2' variant="top" src={img} />
             <Card.Body>
                 <Card.Title className='fw-bold'>{name}</Card.Title>
@@ -18,7 +18,7 @@ const Tool = ({ showTool }) => {
                 </div>
             </Card.Body>
             <Card.Footer className='border-0 bg-white'>
-                <Link to='/placeOrder' className="btn btn-secondary w-100">Place Order</Link>
+                <Link to='/placeOrder' state={{ _id }} className="btn btn-secondary w-100 mb-2">Place Order</Link>
             </Card.Footer>
         </Card>
     );

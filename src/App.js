@@ -2,6 +2,8 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './Pages/Home/Home';
 import NotFound from './Pages/NotFound/NotFound';
+import PlaceOrder from './Pages/PlaceOrder/PlaceOrder';
+import Reviews from './Pages/Reviews/Reviews';
 import Footer from './Pages/Shared/Footer';
 import Header from './Pages/Shared/Header';
 import Tools from './Pages/Tools/Tools';
@@ -14,6 +16,8 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/home' element={<Home />} />
         <Route path='/tools' element={<Tools />} />
+        <Route path='/placeOrder' element={<PlaceOrder />} />
+        <Route path='/reviews' element={<Reviews />} />
 
 
         <Route path='*' element={<NotFound />} />
