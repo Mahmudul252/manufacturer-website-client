@@ -7,6 +7,7 @@ import auth from '../../firebase.init';
 
 const Header = () => {
     const [user] = useAuthState(auth);
+    console.log(user)
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" className='fixed-top' variant="dark">
             <Container>
@@ -20,6 +21,7 @@ const Header = () => {
                     <Nav>
                         {
                             user ? <div className='d-flex'>
+                                <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
                                 <span className='text-white mt-2 me-2'>{user?.displayName}</span>
                                 <Nav.Link onClick={() => signOut(auth)}>Sign Out</Nav.Link>
                             </div>

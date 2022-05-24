@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useForm } from 'react-hook-form';
 import { useLocation } from 'react-router-dom';
 import auth from '../../firebase.init';
 import useTools from '../../hooks/useTools';
-import Loading from '../Shared/Loading';
 import './PlaceOrder.css';
 
 const PlaceOrder = () => {
@@ -49,11 +47,11 @@ const PlaceOrder = () => {
             <form onSubmit={handlePurchaseOrder}>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">Name</label>
-                    <input type="text" className="form-control" id="name" aria-describedby="nameHelp" defaultValue={'props.firstName'} readOnly disabled />
+                    <input type="text" className="form-control" id="name" aria-describedby="nameHelp" defaultValue={`${user.displayName}`} readOnly disabled />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address</label>
-                    <input type="email" className="form-control" id="email" aria-describedby="emailHelp" defaultValue={'props@hghga.com'} readOnly disabled />
+                    <input type="email" className="form-control" id="email" aria-describedby="emailHelp" defaultValue={`${user.email}`} readOnly disabled />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="quantity" className="form-label">Order Quantity</label>
