@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { useLocation } from 'react-router-dom';
+import auth from '../../firebase.init';
 import useTools from '../../hooks/useTools';
 import Loading from '../Shared/Loading';
 import './PlaceOrder.css';
@@ -10,6 +12,7 @@ const PlaceOrder = () => {
     const id = location?.state?._id;
     const [tools, loading] = useTools();
     const [errorMessage, setErrorMessage] = useState('');
+    const [user] = useAuthState(auth);
 
     if (loading) {
         return;
@@ -54,19 +57,19 @@ const PlaceOrder = () => {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="quantity" className="form-label">Order Quantity</label>
-                    <input type="number" name="quantity" className="form-control" id="quantity" aria-describedby="quantityHelp" placeholder='Please Enter Quantity' onWheel={event => event.target.blur()} required />
+                    <input type="number" name="quantity" className="form-control" id="quantity" aria-describedby="quantityHelp" placeholder='Please Enter Quantity' onFocus={() => setErrorMessage('')} onWheel={event => event.target.blur()} defaultValue={minimumOrderQuantity} required />
 
                 </div>
                 <div className="mb-3">
                     <label htmlFor="phone" className="form-label">Phone Number</label>
-                    <input type="number" name="phone" className="form-control" id="phone" aria-describedby="phoneHelp" placeholder='Please Enter Phone Number' onWheel={event => event.target.blur()} required />
+                    <input type="number" name="phone" className="form-control" id="phone" aria-describedby="phoneHelp" placeholder='Please Enter Phone Number' onFocus={() => setErrorMessage('')} onWheel={event => event.target.blur()} required />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="address" className="form-label">Address</label>
                     <input type="text" name="address" className="form-control" id="address" aria-describedby="addressHelp" placeholder='Please Enter Address' required />
                 </div>
                 {errorMessage && <p className="text-danger">{errorMessage}</p>}
-                <input className='btn btn-secondary d-block w-50 mx-auto mt-2' type="submit" />
+                <input className='btn btn-secondary d-block w-50 mx-auto mt-2' type="submit" disabled={errorMessage} />
             </form>
         </div>
     );
