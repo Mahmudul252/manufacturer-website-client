@@ -1,7 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './Pages/Home/Home';
+import Login from './Pages/Login/Login';
 import RequireAuth from './Pages/Login/RequireAuth';
+import SignUp from './Pages/Login/SignUp';
 import NotFound from './Pages/NotFound/NotFound';
 import PlaceOrder from './Pages/PlaceOrder/PlaceOrder';
 import Reviews from './Pages/Reviews/Reviews';
@@ -23,6 +25,8 @@ function App() {
           </RequireAuth>
         } />
         <Route path='/reviews' element={<Reviews />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<SignUp />} />
 
 
         <Route path='*' element={<NotFound />} />
