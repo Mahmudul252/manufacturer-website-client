@@ -1,6 +1,7 @@
 import React from 'react';
 import useReviews from '../../hooks/useReviews';
 import Loading from '../Shared/Loading';
+import SeeAllButton from '../Shared/SeeAllButton';
 import Review from './Review';
 
 const Reviews = ({ showAll = true }) => {
@@ -13,7 +14,7 @@ const Reviews = ({ showAll = true }) => {
 
     return (
         <div className='container mx-auto my-5'>
-            <h2 className='text-center pt-4 mb-3'>What our customers say</h2>
+            <h2 className='text-center pt-4 mb-3 display-6'>What our customers say</h2>
             <div className="row gap-3 review-container">
                 {
                     showReviews.map(review => <Review
@@ -22,6 +23,7 @@ const Reviews = ({ showAll = true }) => {
                     ></Review>)
                 }
             </div>
+            {!showAll && <SeeAllButton text={'Reviews'}></SeeAllButton>}
         </div>
     );
 };

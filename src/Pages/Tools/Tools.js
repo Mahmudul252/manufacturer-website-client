@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import useTools from '../../hooks/useTools';
 import Loading from '../Shared/Loading';
+import SeeAllButton from '../Shared/SeeAllButton';
 import Tool from './Tool';
 
 const Tools = ({ showAll = true }) => {
@@ -25,6 +27,7 @@ const Tools = ({ showAll = true }) => {
                     )
                 }
             </div>
+            {!showAll && <SeeAllButton text={'Tools'}></SeeAllButton>}
         </div>
     );
 };

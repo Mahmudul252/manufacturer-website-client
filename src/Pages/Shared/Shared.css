@@ -1,0 +1,9 @@
+.see-all-button {
+    width: 25% !important;
+}
+
+@media only screen and (max-width: 992px) {
+    .see-all-button {
+        width: 50% !important;
+    }
+}

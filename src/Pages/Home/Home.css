@@ -1,0 +1,13 @@
+.custom-border {
+    border-right: 2px solid rgb(105, 94, 94);
+    padding-right: 20px;
+}
+
+@media only screen and (max-width: 992px) {
+    .custom-border {
+        border-right: 0;
+        padding-right: 0;
+        border-bottom: 2px solid rgb(105, 94, 94);
+        padding-bottom: 20px;
+    }
+}
