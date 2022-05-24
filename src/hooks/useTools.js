@@ -2,12 +2,17 @@ import { useEffect, useState } from "react"
 
 const useTools = () => {
     const [tools, setTools] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        setLoading(true);
         fetch('data.json')
             .then(res => res.json())
-            .then(data => setTools(data))
+            .then(data => {
+                setLoading(false);
+                setTools(data);
+            })
     }, []);
-    return [tools];
+    return [tools, loading];
 }
 export default useTools;

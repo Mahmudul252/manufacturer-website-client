@@ -1,11 +1,16 @@
 import React from 'react';
 import useReviews from '../../hooks/useReviews';
+import Loading from '../Shared/Loading';
 import Review from './Review';
 
 const Reviews = ({ showAll = true }) => {
-    const [reviews] = useReviews();
+    const [reviews, loading] = useReviews();
     let showReviews;
     showAll ? showReviews = reviews : showReviews = reviews?.slice(0, 3);
+    if (loading) {
+        return <Loading></Loading>
+    }
+
     return (
         <div className='container mx-auto my-5'>
             <h2 className='text-center pt-4 mb-3'>What our customers say</h2>
