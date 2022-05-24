@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
-import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useAuthState, useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 // import PageTitle from '../../shared/PageTitle/PageTitle';
 import SocialLogin from './SocialLogin';
+import useUsers from '../../hooks/useUsers';
+import Loading from '../Shared/Loading';
 
 const SignUp = () => {
     const location = useLocation();
@@ -15,6 +17,12 @@ const SignUp = () => {
     const [updateProfile] = useUpdateProfile(auth);
     const [sendEmailVerification] = useSendEmailVerification(auth);
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [users, loading] = useUsers();
+
+    if (loading) {
+        return <Loading />
+    }
+
 
     const from = location?.state?.from?.pathname || '/';
 
@@ -24,8 +32,25 @@ const SignUp = () => {
                 await updateProfile({ displayName });
                 toast("Email Verification Sent");
                 await sendEmailVerification();
-            })
-            .then(() => navigate(from, { replace: true }));
+
+                const registeredUser = users?.find(u => u.email === userEmail);
+                if (!registeredUser) {
+                    const newUser = { userName: displayName, userEmail };
+                    fetch('http://localhost:5000/users', {
+                        method: "POST",
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(newUser)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data);
+                            navigate(from, { replace: true });
+                        });
+                }
+            });
+
     }
 
     return (

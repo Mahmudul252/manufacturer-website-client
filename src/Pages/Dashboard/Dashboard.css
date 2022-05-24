@@ -1,7 +1,11 @@
 .side-navbar {
     height: 100vh;
+    background-color: #3e464d;
+    width: 18%;
 }
 
 .dashboard-window {
-    margin-left: 40%;
+    height: 80vh;
+    margin-left: 20%;
+    margin-top: 20px;
 }

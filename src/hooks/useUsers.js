@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react"
 
-const useTools = () => {
-    const [tools, setTools] = useState([]);
+const useUsers = () => {
+    const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         setLoading(true);
-        fetch('http://localhost:5000/tools')
+        fetch('http://localhost:5000/users')
             .then(res => res.json())
             .then(data => {
                 setLoading(false);
-                setTools(data);
+                setUsers(data);
             })
     }, []);
-    return [tools, loading];
+    return [users, loading];
 }
-export default useTools;
+export default useUsers;

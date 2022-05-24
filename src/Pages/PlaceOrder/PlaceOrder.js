@@ -22,6 +22,7 @@ const PlaceOrder = () => {
         const quantity = event.target.quantity.value;
         const phone = event.target.phone.value;
         const address = event.target.address.value;
+
         if (parseInt(quantity) < parseInt(minimumOrderQuantity)) {
             setErrorMessage(`Minimum order quantity is ${minimumOrderQuantity}`);
         }
@@ -34,6 +35,18 @@ const PlaceOrder = () => {
         else {
             setErrorMessage('');
         }
+
+        const order = { userName: user.displayName, userEmail: user.email, phone, orderId: _id, orderQuantity: quantity, address };
+        console.log(order)
+        fetch('http://localhost:5000/orders', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(order)
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
     }
     return (
         <div className='w-50 mx-auto my-5 py-2'>
