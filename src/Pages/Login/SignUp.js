@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, FloatingLabel as p, Form } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
 import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -18,9 +18,10 @@ const SignUp = () => {
     const [sendEmailVerification] = useSendEmailVerification(auth);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [users, loading] = useUsers();
+    const [signUpLoading, setSignUpLoading] = useState(false);
     const imageStorageKey = '6bb82bf574ef700af209c385111f9392';
 
-    if (loading) {
+    if (loading || signUpLoading) {
         return <Loading />
     }
 
@@ -28,9 +29,9 @@ const SignUp = () => {
     const from = location?.state?.from?.pathname || '/';
 
     const onSubmit = ({ userEmail, userName: displayName, userPassword, userPhoto }) => {
+        setSignUpLoading(true);
         let img;
         const image = userPhoto[0];
-        console.log(userPhoto, image)
         const formData = new FormData();
         formData.append('image', image);
         const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
@@ -42,7 +43,6 @@ const SignUp = () => {
             .then(result => {
                 if (result.success) {
                     img = result.data.url;
-                    console.log(result, img)
                 }
             })
 
@@ -65,6 +65,7 @@ const SignUp = () => {
                         .then(res => res.json())
                         .then(data => {
                             console.log(data);
+                            setSignUpLoading(false);
                             navigate(from, { replace: true });
                         });
                 }

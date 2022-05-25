@@ -27,19 +27,21 @@ const SocialSignIn = ({ from }) => {
     useEffect(() => {
         const loggedInUser = googleUser || githubUser;
         if (loggedInUser) {
-            let userName, userEmail;
+            let userName, userEmail, userPhoto;
             if (googleUser) {
                 userName = googleUser.user.displayName;
                 userEmail = googleUser.user.email;
+                userPhoto = googleUser.user.photoURL;
             }
             else if (githubUser) {
                 userName = githubUser.user.displayName;
                 userEmail = githubUser.user.email;
+                userPhoto = githubUser.user.photoURL;
             }
 
             const registeredUser = users?.find(u => u.userEmail === userEmail);
             if (!registeredUser) {
-                const newUser = { userName, userEmail };
+                const newUser = { userName, userEmail, userPhoto };
                 fetch('http://localhost:5000/users', {
                     method: "POST",
                     headers: {
