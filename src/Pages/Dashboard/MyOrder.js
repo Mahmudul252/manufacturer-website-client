@@ -1,8 +1,8 @@
 import React from 'react';
 
-const MyOrder = ({ userOrder, index }) => {
-    const { toolName, orderQuantity, totalPrice } = userOrder;
-    console.log(userOrder)
+const MyOrder = ({ userOrder, index, handleCancelOrder, handlePayOrder }) => {
+    const { _id, toolName, orderQuantity, totalPrice } = userOrder;
+    // console.log(userOrder)
     return (
         <tr>
             <td>{index + 1}</td>
@@ -10,8 +10,8 @@ const MyOrder = ({ userOrder, index }) => {
             <td>{orderQuantity}</td>
             <td>{totalPrice}</td>
             <td>
-                <button className="btn btn-success me-2">Pay</button>
-                <button className="btn btn-danger">Delete</button>
+                <button onClick={() => handlePayOrder(_id)} className="btn btn-success me-2">Pay</button>
+                <button onClick={() => handleCancelOrder(_id)} className="btn btn-danger">Delete</button>
             </td>
         </tr>
     );

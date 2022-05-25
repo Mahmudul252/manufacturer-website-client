@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import Loading from '../Shared/Loading';
 import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
 import useOrders from '../../hooks/useOrders';
 import MyOrder from './MyOrder';
+import { toast } from 'react-toastify';
 
 const MyOrders = () => {
     const [orders, loading] = useOrders();
@@ -13,8 +15,31 @@ const MyOrders = () => {
 
     useEffect(() => {
         setUserOrders(orders?.filter(order => order.userEmail === user.email));
-    }, [orders, user.email])
-    console.log(userOrders);
+    }, [orders, user.email]);
+
+    if (loading) {
+        return <Loading />;
+    }
+
+
+    const handleCancelOrder = _id => {
+        const proceed = window.confirm('Are you sure to cancel the order?');
+        if (proceed) {
+            fetch(`http://localhost:5000/orders/${_id}`, {
+                method: "DELETE"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        setUserOrders(userOrders.filter(userOrder => userOrder._id !== _id));
+                        toast.success('Order Canceled!');
+                    }
+                })
+        }
+    }
+    const handlePayOrder = _id => {
+        console.log('inside pay')
+    }
 
     return (
         <div>
@@ -37,6 +62,8 @@ const MyOrders = () => {
                                     key={userOrder._id}
                                     userOrder={userOrder}
                                     index={index}
+                                    handleCancelOrder={handleCancelOrder}
+                                    handlePayOrder={handlePayOrder}
                                 ></MyOrder>)
                             }
                         </tbody>
