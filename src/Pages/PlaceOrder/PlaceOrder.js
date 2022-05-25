@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import useTools from '../../hooks/useTools';
 import './PlaceOrder.css';
@@ -11,12 +12,14 @@ const PlaceOrder = () => {
     const [tools, loading] = useTools();
     const [errorMessage, setErrorMessage] = useState('');
     const [user] = useAuthState(auth);
+    const [orderPlaced, setOrderPlaced] = useState(false);
 
     if (loading) {
         return;
     }
     const selectedTool = tools?.find(tool => tool._id === id);
     const { _id, name, minimumOrderQuantity, availableQuantity, unitPrice } = selectedTool || {};
+
     const handlePurchaseOrder = event => {
         event.preventDefault();
         const quantity = event.target.quantity.value;
@@ -34,19 +37,22 @@ const PlaceOrder = () => {
         }
         else {
             setErrorMessage('');
+            const order = { userName: user.displayName, userEmail: user.email, phone, orderId: _id, orderQuantity: quantity, address };
+
+            fetch('http://localhost:5000/orders', {
+                method: "POST",
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(order)
+            })
+                .then(res => res.json())
+                .then(() => {
+                    setOrderPlaced(true);
+                    toast.success('Order Placed Successfully!');
+                })
         }
 
-        const order = { userName: user.displayName, userEmail: user.email, phone, orderId: _id, orderQuantity: quantity, address };
-        console.log(order)
-        fetch('http://localhost:5000/orders', {
-            method: "POST",
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(order)
-        })
-            .then(res => res.json())
-            .then(data => console.log(data))
     }
     return (
         <div className='w-50 mx-auto my-5 py-2'>
@@ -80,6 +86,7 @@ const PlaceOrder = () => {
                     <input type="text" name="address" className="form-control" id="address" aria-describedby="addressHelp" placeholder='Please Enter Address' required />
                 </div>
                 {errorMessage && <p className="text-danger">{errorMessage}</p>}
+                {orderPlaced && <p>Your order is placed successfully. <Link to='/dashboard/myOrders' className='text-decoration-none'>See your orders</Link></p>}
                 <input className='btn btn-secondary d-block w-50 mx-auto mt-2' type="submit" disabled={errorMessage} />
             </form>
         </div>

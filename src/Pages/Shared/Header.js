@@ -21,8 +21,8 @@ const Header = () => {
                     <Nav>
                         {
                             user ? <div className='d-flex'>
-                                <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
                                 <span className='text-white mt-2 me-2'>{user?.displayName}</span>
+                                <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
                                 <Nav.Link onClick={() => signOut(auth)}>Sign Out</Nav.Link>
                             </div>
                                 :
