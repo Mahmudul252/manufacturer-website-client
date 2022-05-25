@@ -32,13 +32,10 @@ const MyOrders = () => {
                 .then(data => {
                     if (data.deletedCount > 0) {
                         setUserOrders(userOrders.filter(userOrder => userOrder._id !== _id));
-                        toast.success('Order Canceled!');
+                        toast.success('Order Cancelled!');
                     }
                 })
         }
-    }
-    const handlePayOrder = _id => {
-        console.log('inside pay')
     }
 
     return (
@@ -63,7 +60,6 @@ const MyOrders = () => {
                                     userOrder={userOrder}
                                     index={index}
                                     handleCancelOrder={handleCancelOrder}
-                                    handlePayOrder={handlePayOrder}
                                 ></MyOrder>)
                             }
                         </tbody>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const MyOrder = ({ userOrder, index, handleCancelOrder, handlePayOrder }) => {
     const { _id, toolName, orderQuantity, totalPrice } = userOrder;
@@ -10,8 +11,8 @@ const MyOrder = ({ userOrder, index, handleCancelOrder, handlePayOrder }) => {
             <td>{orderQuantity}</td>
             <td>{totalPrice}</td>
             <td>
-                <button onClick={() => handlePayOrder(_id)} className="btn btn-success me-2">Pay</button>
-                <button onClick={() => handleCancelOrder(_id)} className="btn btn-danger">Delete</button>
+                <Link to='/payment' state={{ _id }} className="btn btn-success me-2">Pay</Link>
+                <button onClick={() => handleCancelOrder(_id)} className="btn btn-danger ">Delete</button>
             </td>
         </tr>
     );

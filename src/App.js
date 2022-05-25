@@ -11,6 +11,7 @@ import Login from './Pages/Login/Login';
 import RequireAuth from './Pages/Login/RequireAuth';
 import SignUp from './Pages/Login/SignUp';
 import NotFound from './Pages/NotFound/NotFound';
+import Payment from './Pages/Payment/Payment';
 import PlaceOrder from './Pages/PlaceOrder/PlaceOrder';
 import Reviews from './Pages/Reviews/Reviews';
 import Footer from './Pages/Shared/Footer';
@@ -30,6 +31,12 @@ function App() {
             <PlaceOrder />
           </RequireAuth>
         } />
+        <Route path='/payment' element={
+          <RequireAuth>
+            <Payment />
+          </RequireAuth>
+        } />
+
         <Route path='/dashboard' element={
           <RequireAuth>
             <Dashboard />
@@ -51,6 +58,7 @@ function App() {
             </RequireAuth>
           } />
         </Route>
+
         <Route path='/reviews' element={<Reviews />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
