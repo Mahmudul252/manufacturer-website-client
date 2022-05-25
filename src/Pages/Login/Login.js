@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuthState, useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -22,12 +22,16 @@ const Login = () => {
     ] = useSignInWithEmailAndPassword(auth);
     const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
     const [user, userLoading] = useAuthState(auth);
+    const from = location?.state?.from?.pathname || '/';
+
+    useEffect(() => {
+        user && navigate(from, { replace: true });
+    }, [from, navigate, user])
 
     if (loading || userLoading) {
         return <Loading></Loading>;
     }
 
-    const from = location?.state?.from?.pathname || '/';
     const handleUserLogin = async event => {
         event.preventDefault();
         const email = event.target.email.value;
@@ -41,7 +45,7 @@ const Login = () => {
         toast('Password reset email sent');
         setResetClicked(true);
     }
-    user && navigate(from, { replace: true })
+
 
 
     return (

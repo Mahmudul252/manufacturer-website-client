@@ -13,7 +13,7 @@ const Dashboard = () => {
                     <Nav.Link className='text-white' as={Link} to='/dashboard/addReview'>Add a Review</Nav.Link>
                     <Nav.Link className='text-white' as={Link} to='/dashboard/myProfile'>My Profile</Nav.Link>
                 </div>
-                <div className=" dashboard-window">
+                <div className="dashboard-window">
                     <h2 className="display-5">Welcome to Dashboard</h2>
                     <Outlet />
                 </div>

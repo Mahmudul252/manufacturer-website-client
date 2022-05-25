@@ -37,7 +37,7 @@ const PlaceOrder = () => {
         }
         else {
             setErrorMessage('');
-            const order = { userName: user.displayName, userEmail: user.email, phone, orderId: _id, orderQuantity: quantity, address };
+            const order = { toolName: name, userName: user.displayName, userEmail: user.email, phone, orderId: _id, orderQuantity: quantity, address, totalPrice: JSON.stringify(quantity * unitPrice) };
 
             fetch('http://localhost:5000/orders', {
                 method: "POST",
@@ -50,9 +50,9 @@ const PlaceOrder = () => {
                 .then(() => {
                     setOrderPlaced(true);
                     toast.success('Order Placed Successfully!');
+                    event.target.reset();
                 })
         }
-
     }
     return (
         <div className='w-50 mx-auto my-5 py-2'>
