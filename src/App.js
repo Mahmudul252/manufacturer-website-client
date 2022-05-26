@@ -21,6 +21,7 @@ import Reviews from './Pages/Reviews/Reviews';
 import Footer from './Pages/Shared/Footer';
 import Header from './Pages/Shared/Header';
 import Tools from './Pages/Tools/Tools';
+import UnAuthorizedAccess from './Pages/UnAuthorizedAccess/UnAuthorizedAccess';
 
 function App() {
   return (
@@ -86,7 +87,7 @@ function App() {
         <Route path='/reviews' element={<Reviews />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
-
+        <Route path='/unAuthorizedAccess' element={<UnAuthorizedAccess />} />
 
         <Route path='*' element={<NotFound />} />
       </Routes>
