@@ -87,7 +87,7 @@ const PlaceOrder = () => {
                 </div>
                 {errorMessage && <p className="text-danger">{errorMessage}</p>}
                 {orderPlaced && <p>Your order is placed successfully. <Link to='/dashboard/myOrders' className='text-decoration-none'>See your orders</Link></p>}
-                <input className='btn btn-secondary d-block w-50 mx-auto mt-2' type="submit" disabled={errorMessage} />
+                <input className='btn btn-secondary d-block w-50 mx-auto mt-2' type="submit" value='PlaceOrder' disabled={errorMessage} />
             </form>
         </div>
     );

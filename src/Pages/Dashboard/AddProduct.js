@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import useUsers from '../../hooks/useUsers';
 import Loading from '../Shared/Loading';
@@ -9,9 +10,11 @@ import Loading from '../Shared/Loading';
 const AddProduct = () => {
     const [user, loading] = useAuthState(auth);
     const [users, userLoading] = useUsers();
+    const [addProductLoading, setAddProductLoading] = useState(false);
     const navigate = useNavigate();
     const [loggedInUser, setLoggedInUser] = useState({});
     const [renderCount, setRenderCount] = useState(0);
+    const imageStorageKey = '6bb82bf574ef700af209c385111f9392';
 
     useEffect(() => {
         setLoggedInUser(users.find(u => u.userEmail === user.email));
@@ -24,31 +27,92 @@ const AddProduct = () => {
         }
     }
 
-    if (loading || userLoading) {
+    if (loading || userLoading || addProductLoading) {
         return <Loading />;
     }
-    const handleAddProduct = event => {
+    const handleAddProduct = async event => {
+        event.preventDefault();
+        setAddProductLoading(true);
+        const image = event.target.img.files[0];
+        const name = event.target.name.value;
+        const minimumOrderQuantity = event.target.minimumOrderQuantity.value;
+        const availableQuantity = event.target.availableQuantity.value;
+        const unitPrice = event.target.unitPrice.value;
+        const description = event.target.description.value;
+        let img;
 
+        const formData = new FormData();
+        formData.append('image', image);
+        const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+        await fetch(url, {
+            method: "POST",
+            body: formData
+        })
+            .then(res => res.json())
+            .then(result => {
+                if (result.success) {
+                    img = result.data.url;
+                    console.log(img);
+                }
+            });
+        const addedProduct = { img, name, minimumOrderQuantity, availableQuantity, description, unitPrice };
+        console.log(addedProduct);
+
+        fetch('http://localhost:5000/tools', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(addedProduct)
+        })
+            .then(res => res.json())
+            .then(data => {
+                setAddProductLoading(false);
+                toast.success('Product Added Successfully!');
+            });
     }
     return (
         <div>
             <h2>Add a Product</h2>
             <Form onSubmit={handleAddProduct}>
-                <Form.Group className="mb-3" controlId="formBasicReview">
-                    <Form.Label>Review Description</Form.Label>
-                    <Form.Control name="review" type="text" placeholder="Enter Review" required />
-                </Form.Group>
 
-                <p className='mb-1'>Ratings</p>
-                <Form.Select name="ratings" aria-label="Default select example" defaultValue="5">
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                    <option value="4">Four</option>
-                    <option value="5">Five</option>
-                </Form.Select>
+                <div className="d-flex gap-4">
+                    <Form.Group className="mb-3" controlId="toolName">
+                        <Form.Label>Tool Name</Form.Label>
+                        <Form.Control name="name" type="text" placeholder="Enter Tool Name" required />
+                    </Form.Group>
 
-                <Button className='mt-3' variant="secondary" type="submit">
+                    <Form.Group className="mb-3" controlId="unitPrice">
+                        <Form.Label>Unit Price</Form.Label>
+                        <Form.Control name="unitPrice" type="number" placeholder="Enter Unit Price" required onWheel={event => event.target.blur()} />
+                    </Form.Group>
+                </div>
+
+                <div className="d-flex gap-4">
+                    <Form.Group className="mb-3" controlId="availableQuantity">
+                        <Form.Label>Available Quantity</Form.Label>
+                        <Form.Control name="availableQuantity" type="number" placeholder="Enter Available Quantity" required onWheel={event => event.target.blur()} />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="description">
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control name="description" type="text" placeholder="Enter Description" required />
+                    </Form.Group>
+                </div>
+
+                <div className="d-flex gap-4">
+                    <Form.Group className="mb-3" controlId="minimumOrderQuantity">
+                        <Form.Label>Minimum Order Quantity</Form.Label>
+                        <Form.Control name="minimumOrderQuantity" type="number" placeholder="Enter Minimum Order Quantity" required onWheel={event => event.target.blur()} />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="img">
+                        <Form.Label>Tool Photo</Form.Label>
+                        <Form.Control name="img" type="file" required />
+                    </Form.Group>
+                </div>
+
+                <Button className='w-25' variant="secondary" type="submit">
                     Submit
                 </Button>
             </Form>
