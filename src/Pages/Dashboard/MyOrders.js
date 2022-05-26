@@ -40,10 +40,10 @@ const MyOrders = () => {
 
     return (
         <div>
-            <h2 className="display-6 text-center">My Orders</h2>
+            <h2 className="fs-3 text-center w-75">My Orders</h2>
             {
                 userOrders.length ?
-                    <Table striped bordered hover variant="dark" className='text-center'>
+                    <Table striped bordered hover variant="dark" className='text-center w-75'>
                         <thead>
                             <tr>
                                 <th></th>

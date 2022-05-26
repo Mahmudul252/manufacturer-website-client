@@ -9,9 +9,9 @@ const MyOrder = ({ userOrder, index, handleCancelOrder, handlePayOrder }) => {
             <td>{index + 1}</td>
             <td>{toolName}</td>
             <td>{orderQuantity}</td>
-            <td>{totalPrice}</td>
+            <td>${totalPrice}</td>
             <td>
-                <Link to='/payment' state={{ _id }} className="btn btn-success me-2">Pay</Link>
+                <Link to='/payment' state={{ _id }} className="btn btn-success me-3">Pay</Link>
                 <button onClick={() => handleCancelOrder(_id)} className="btn btn-danger ">Delete</button>
             </td>
         </tr>
