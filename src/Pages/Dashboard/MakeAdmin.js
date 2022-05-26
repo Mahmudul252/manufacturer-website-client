@@ -30,12 +30,14 @@ const MakeAdmin = () => {
                 headers: {
                     'content-type': 'application/json'
                 },
-                body: JSON.stringify({ role: 'admin' })
+                body: JSON.stringify({ role: 'Admin' })
             })
                 .then(res => res.json())
                 .then(data => {
+                    const restUsers = updatedUsers.filter(updatedUser => updatedUser._id !== _id);
+                    selectedUser.role = 'Admin';
+                    setUpdatedUsers([...restUsers, selectedUser]);
                     toast.success(`Made ${selectedUser.userName} an admin successfully!`);
-                    setUpdatedUsers([...updatedUsers, selectedUser.role = 'admin']);
                     setAdminLoading(false);
                 });
         }

@@ -25,7 +25,7 @@ const Dashboard = () => {
             <div className="d-flex">
                 <div className="text-white position-fixed side-navbar ps-3 pt-3">
                     <h2>Dashboard</h2>
-                    {loggedInUser?.role === 'admin' ?
+                    {loggedInUser?.role === 'Admin' ?
                         <>
                             <Nav.Link className='text-white' as={Link} to='/dashboard/manageOrders'>Manage All Orders</Nav.Link>
                             <Nav.Link className='text-white' as={Link} to='/dashboard/addProduct'>Add A Product</Nav.Link>
