@@ -13,6 +13,7 @@ const MyProfile = () => {
     const [loggedInUser, setLoggedInUser] = useState({});
     const [updateLoading, setUpdateLoading] = useState(false);
 
+
     useEffect(() => {
         setLoggedInUser(users.find(u => u.userEmail === user.email));
     }, [users, user.email]);
@@ -25,9 +26,10 @@ const MyProfile = () => {
         event.preventDefault();
         setUpdateLoading(true);
         const location = event.target.district.value;
+        const phone = event.target.phone.value;
         const linkedIn = event.target.linkedIn.value;
         const education = event.target.education.value;
-        const userProfileInfo = { location, linkedIn, education };
+        const userProfileInfo = { location, linkedIn, education, phone };
 
         const url = `http://localhost:5000/users/${loggedInUser._id}`;
         fetch(url, {
@@ -41,6 +43,7 @@ const MyProfile = () => {
             .then(data => {
                 setUpdate(false);
                 setUpdateLoading(false);
+                setLoggedInUser(userProfileInfo);
                 toast.success('Profile Updated Successfully!');
             });
     }
@@ -56,8 +59,9 @@ const MyProfile = () => {
                     <p className='mb-0'>Email: {user.email}</p>
 
                     <div className={loggedInUser?.education ? '' : 'd-none'}>
-                        <p className='mb-0'>District: {user.email}</p>
-                        <p className='mb-0'>Education: {user.email}</p>
+                        <p className='mb-0'>District: {loggedInUser?.location}</p>
+                        <p className='mb-0'>Phone: {loggedInUser?.phone}</p>
+                        <p className='mb-0'>Education: {loggedInUser?.education}</p>
                         <p className='mb-0'>LinkedIn Profile: <a
                             href={loggedInUser?.linkedIn}
                             className="text-decoration-none"
@@ -75,6 +79,11 @@ const MyProfile = () => {
                         <Form.Group className="mb-3" controlId="formBasicDistrict">
                             <Form.Label>District</Form.Label>
                             <Form.Control name="district" type="text" placeholder="Enter your district name" required />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="formBasicPhone">
+                            <Form.Label>Phone</Form.Label>
+                            <Form.Control onWheel={e => e.target.blur()} name="phone" type="number" placeholder="Enter your phone number" required />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicLinkedIn">
