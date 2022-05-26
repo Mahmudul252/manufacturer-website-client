@@ -2,8 +2,12 @@ import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import AddProduct from './Pages/Dashboard/AddProduct';
 import AddReview from './Pages/Dashboard/AddReview';
 import Dashboard from './Pages/Dashboard/Dashboard';
+import MakeAdmin from './Pages/Dashboard/MakeAdmin';
+import ManageOrders from './Pages/Dashboard/ManageOrders';
+import ManageProducts from './Pages/Dashboard/ManageProducts';
 import MyOrders from './Pages/Dashboard/MyOrders';
 import MyProfile from './Pages/Dashboard/MyProfile';
 import Home from './Pages/Home/Home';
@@ -50,6 +54,26 @@ function App() {
           <Route path='addReview' element={
             <RequireAuth>
               <AddReview />
+            </RequireAuth>
+          } />
+          <Route path='manageOrders' element={
+            <RequireAuth>
+              <ManageOrders />
+            </RequireAuth>
+          } />
+          <Route path='addProduct' element={
+            <RequireAuth>
+              <AddProduct />
+            </RequireAuth>
+          } />
+          <Route path='makeAdmin' element={
+            <RequireAuth>
+              <MakeAdmin />
+            </RequireAuth>
+          } />
+          <Route path='manageProducts' element={
+            <RequireAuth>
+              <ManageProducts />
             </RequireAuth>
           } />
           <Route path='myProfile' element={
