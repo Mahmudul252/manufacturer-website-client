@@ -38,11 +38,6 @@ function App() {
             <PlaceOrder />
           </RequireAuth>
         } />
-        <Route path='/payment' element={
-          <RequireAuth>
-            <Payment />
-          </RequireAuth>
-        } />
 
         <Route path='/dashboard' element={
           <RequireAuth>
@@ -82,6 +77,12 @@ function App() {
           <Route path='myProfile' element={
             <RequireAuth>
               <MyProfile />
+            </RequireAuth>
+          } />
+
+          <Route path='payment/:id' element={
+            <RequireAuth>
+              <Payment />
             </RequireAuth>
           } />
         </Route>
