@@ -15,6 +15,7 @@ import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import RequireAuth from './Pages/Login/RequireAuth';
 import SignUp from './Pages/Login/SignUp';
+import MyPortFolio from './Pages/MyPortFolio/MyPortFolio';
 import NotFound from './Pages/NotFound/NotFound';
 import Payment from './Pages/Payment/Payment';
 import PlaceOrder from './Pages/PlaceOrder/PlaceOrder';
@@ -87,6 +88,7 @@ function App() {
 
         <Route path='/reviews' element={<Reviews />} />
         <Route path='/blogs' element={<Blogs />} />
+        <Route path='/myPortfolio' element={<MyPortFolio />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/unAuthorizedAccess' element={<UnAuthorizedAccess />} />
