@@ -1,6 +1,7 @@
 import React from 'react';
 import useTools from '../../hooks/useTools';
 import Loading from '../Shared/Loading';
+import PageTitle from '../Shared/PageTitle';
 import Tool from './Tool';
 
 const Tools = () => {
@@ -12,6 +13,7 @@ const Tools = () => {
 
     return (
         <div className='container mx-auto my-5'>
+            <PageTitle title="Tools" />
             <h2 className="display-6 text-center">Tools</h2>
             <div className="row gap-3">
                 {

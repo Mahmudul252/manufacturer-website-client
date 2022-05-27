@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import useUsers from '../../hooks/useUsers';
 import Loading from '../Shared/Loading';
+import PageTitle from '../Shared/PageTitle';
 
 const MyProfile = () => {
     const [user] = useAuthState(auth);
@@ -50,6 +51,7 @@ const MyProfile = () => {
 
     return (
         <div>
+            <PageTitle title="My Profile" />
             <h2 className="fs-3">My Profile</h2>
             <div className="d-flex gap-5">
 

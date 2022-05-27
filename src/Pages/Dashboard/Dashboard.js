@@ -5,6 +5,7 @@ import { Link, Outlet } from 'react-router-dom';
 import auth from '../../firebase.init';
 import useUsers from '../../hooks/useUsers';
 import Loading from '../Shared/Loading';
+import PageTitle from '../Shared/PageTitle';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -22,6 +23,7 @@ const Dashboard = () => {
 
     return (
         <div>
+            <PageTitle title="Dashboard" />
             <div className="d-flex">
                 <div className="text-white position-fixed side-navbar ps-3 pt-3">
                     <h2>Dashboard</h2>

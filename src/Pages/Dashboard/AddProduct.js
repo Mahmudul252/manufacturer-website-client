@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import useUsers from '../../hooks/useUsers';
 import Loading from '../Shared/Loading';
+import PageTitle from '../Shared/PageTitle';
 
 const AddProduct = () => {
     const [user, loading] = useAuthState(auth);
@@ -73,6 +74,7 @@ const AddProduct = () => {
     }
     return (
         <div>
+            <PageTitle title="Add Product" />
             <h2>Add a Product</h2>
             <Form onSubmit={handleAddProduct}>
 

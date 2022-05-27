@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import SocialSignIn from './SocialLogin';
 import Loading from '../Shared/Loading';
-// import PageTitle from '../../shared/PageTitle/PageTitle';
+import PageTitle from '../Shared/PageTitle';
 
 const Login = () => {
     const location = useLocation();
@@ -50,7 +50,7 @@ const Login = () => {
 
     return (
         <div className='mx-auto mt-5 login-form'>
-            {/* <PageTitle title="Login"></PageTitle> */}
+            <PageTitle title="Login" />
             <h2 className='mb-3 display-6 pt-3'>Please Login</h2>
             <Form onSubmit={handleUserLogin}>
 

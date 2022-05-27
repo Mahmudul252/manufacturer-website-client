@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import useUsers from '../../hooks/useUsers';
 import Loading from '../Shared/Loading';
+import PageTitle from '../Shared/PageTitle';
 import MakeAdminChild from './MakeAdminChild';
 
 const MakeAdmin = () => {
@@ -60,6 +61,7 @@ const MakeAdmin = () => {
 
     return (
         <div>
+            <PageTitle title="Make Admin" />
             <h2 className="fs-3 text-center w-75">Make Admin</h2>
             <Table striped bordered hover variant="dark" className={loggedInUser?.role === 'Admin' ? 'text-center w-75' : 'd-none'}>
                 <thead>

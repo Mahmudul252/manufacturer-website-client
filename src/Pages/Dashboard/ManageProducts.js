@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import useUsers from '../../hooks/useUsers';
 import Loading from '../Shared/Loading';
+import PageTitle from '../Shared/PageTitle';
 
 const ManageProducts = () => {
     const [user, loading] = useAuthState(auth);
@@ -28,6 +29,7 @@ const ManageProducts = () => {
     }
     return (
         <div>
+            <PageTitle title="Manage Products" />
             <h2>Manage Products</h2>
         </div>
     );

@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import useTools from '../../hooks/useTools';
+import PageTitle from '../Shared/PageTitle';
 import './PlaceOrder.css';
 
 const PlaceOrder = () => {
@@ -56,6 +57,7 @@ const PlaceOrder = () => {
     }
     return (
         <div className='w-50 mx-auto my-5 py-2'>
+            <PageTitle title="Place Order" />
             <h2 className='text-center display-6'>Place order for {name}</h2>
             <p className="text-center mb-2">
                 <small className="me-3 text-center">Minimum Order Quantity: {minimumOrderQuantity}</small>

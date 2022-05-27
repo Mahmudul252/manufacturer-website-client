@@ -1,11 +1,11 @@
 import React from 'react';
-// import PageTitle from '../shared/PageTitle/PageTitle';
+import PageTitle from '../Shared/PageTitle';
 import './Blogs.css';
 
 const Blogs = () => {
     return (
         <div className='blogs mx-auto my-4 pt-3'>
-            {/* <PageTitle title="Blogs"></PageTitle> */}
+            <PageTitle title="Blogs" />
             <div className='border border-5 border-warning p-3 m-3 blog'>
                 <h2 className='fs-5 fw-normal text-center'>How will you improve the performance of a React Application?</h2>
                 <p className="fw-light">

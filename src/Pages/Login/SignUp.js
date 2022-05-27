@@ -5,10 +5,10 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
-// import PageTitle from '../../shared/PageTitle/PageTitle';
 import SocialLogin from './SocialLogin';
 import useUsers from '../../hooks/useUsers';
 import Loading from '../Shared/Loading';
+import PageTitle from '../Shared/PageTitle';
 
 const SignUp = () => {
     const location = useLocation();
@@ -75,7 +75,7 @@ const SignUp = () => {
 
     return (
         <div className='login-form mx-auto my-5'>
-            {/* <PageTitle title="Sign Up"></PageTitle> */}
+            <PageTitle title="Sign Up" />
             <h2 className='mb-3 pt-3 display-6'>Please Sign Up</h2>
             <Form onSubmit={handleSubmit(onSubmit)}>
 

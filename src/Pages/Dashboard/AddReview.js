@@ -4,6 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading';
+import PageTitle from '../Shared/PageTitle';
 
 const AddReview = () => {
     const [user, loading] = useAuthState(auth);
@@ -38,6 +39,7 @@ const AddReview = () => {
     }
     return (
         <div>
+            <PageTitle title="Add Review" />
             <h2 className="display-6">Add a Review</h2>
             <Form onSubmit={handleAddReview}>
                 <Form.Group className="mb-3" controlId="formBasicReview">

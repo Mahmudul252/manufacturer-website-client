@@ -7,6 +7,7 @@ import auth from '../../firebase.init';
 import useOrders from '../../hooks/useOrders';
 import MyOrder from './MyOrder';
 import { toast } from 'react-toastify';
+import PageTitle from '../Shared/PageTitle';
 
 const MyOrders = () => {
     const [orders, loading] = useOrders();
@@ -40,6 +41,7 @@ const MyOrders = () => {
 
     return (
         <div>
+            <PageTitle title="My Orders" />
             <h2 className="fs-3 text-center w-75">My Orders</h2>
             {
                 userOrders.length ?
