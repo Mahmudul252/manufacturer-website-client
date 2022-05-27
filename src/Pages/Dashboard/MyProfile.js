@@ -100,8 +100,11 @@ const MyProfile = () => {
                             <option value="Under SSC">Under SSC</option>
                         </Form.Select>
 
-                        <Button className='mt-3' variant="secondary" type="submit">
+                        <Button className='mt-3 me-3' variant="secondary" type="submit">
                             Update Profile
+                        </Button>
+                        <Button onClick={() => setUpdate(false)} className='mt-3' variant="secondary" type="submit">
+                            Cancel
                         </Button>
                     </Form>
                 </div>
