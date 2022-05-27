@@ -25,7 +25,10 @@ const Header = () => {
                             user ? <div className='d-flex flex-lg-row flex-column'>
                                 <span className='text-white mt-2 me-2'>{user?.displayName}</span>
                                 <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
-                                <Nav.Link onClick={() => signOut(auth)}>Sign Out</Nav.Link>
+                                <Nav.Link onClick={() => {
+                                    localStorage.removeItem('accessToken');
+                                    signOut(auth);
+                                }}>Sign Out</Nav.Link>
                             </div>
                                 :
                                 <div className="d-flex flex-lg-row flex-column">

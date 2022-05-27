@@ -8,6 +8,7 @@ import auth from '../../firebase.init';
 import SocialSignIn from './SocialLogin';
 import Loading from '../Shared/Loading';
 import PageTitle from '../Shared/PageTitle';
+import useToken from '../../hooks/useToken';
 
 const Login = () => {
     const location = useLocation();
@@ -22,11 +23,12 @@ const Login = () => {
     ] = useSignInWithEmailAndPassword(auth);
     const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
     const [user, userLoading] = useAuthState(auth);
+    const [token] = useToken(user);
     const from = location?.state?.from?.pathname || '/';
 
     useEffect(() => {
-        user && navigate(from, { replace: true });
-    }, [from, navigate, user])
+        token && navigate(from, { replace: true });
+    }, [from, navigate, token]);
 
     if (loading || userLoading) {
         return <Loading></Loading>;

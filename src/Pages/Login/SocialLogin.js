@@ -48,12 +48,7 @@ const SocialSignIn = ({ from }) => {
                         'content-type': 'application/json'
                     },
                     body: JSON.stringify(newUser)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log(data);
-                        navigate(from, { replace: true });
-                    });
+                });
             }
         }
     }, [from, navigate, googleUser, githubUser, users])

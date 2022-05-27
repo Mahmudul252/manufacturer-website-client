@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useAuthState, useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
@@ -9,24 +9,33 @@ import SocialLogin from './SocialLogin';
 import useUsers from '../../hooks/useUsers';
 import Loading from '../Shared/Loading';
 import PageTitle from '../Shared/PageTitle';
+import useToken from '../../hooks/useToken';
 
 const SignUp = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const [createUserWithEmailAndPassword, , , error] = useCreateUserWithEmailAndPassword(auth); //ignoring user and loading as they are unused
+    const [createUserWithEmailAndPassword, , loading, error] = useCreateUserWithEmailAndPassword(auth); //ignoring user and loading as they are unused
     const [updateProfile] = useUpdateProfile(auth);
     const [sendEmailVerification] = useSendEmailVerification(auth);
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [users, loading] = useUsers();
+    const [users, usersLoading] = useUsers();
     const [signUpLoading, setSignUpLoading] = useState(false);
+    const [user, userLoading] = useAuthState(auth);
+    const [token] = useToken(user);
     const imageStorageKey = '6bb82bf574ef700af209c385111f9392';
+    const from = location?.state?.from?.pathname || '/';
 
-    if (loading || signUpLoading) {
+    useEffect(() => {
+        token && navigate(from, { replace: true });
+    }, [from, navigate, token]);
+
+    if (loading || signUpLoading || usersLoading || userLoading) {
         return <Loading />
     }
 
 
-    const from = location?.state?.from?.pathname || '/';
+
+
 
     const onSubmit = ({ userEmail, userName: displayName, userPassword, userPhoto }) => {
         setSignUpLoading(true);
@@ -63,10 +72,8 @@ const SignUp = () => {
                         body: JSON.stringify(newUser)
                     })
                         .then(res => res.json())
-                        .then(data => {
-                            console.log(data);
+                        .then(() => {
                             setSignUpLoading(false);
-                            navigate(from, { replace: true });
                         });
                 }
             });
