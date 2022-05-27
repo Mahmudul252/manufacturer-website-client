@@ -14,6 +14,7 @@ const PlaceOrder = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [user] = useAuthState(auth);
     const [orderPlaced, setOrderPlaced] = useState(false);
+    const [disable, setDisable] = useState(false);
 
     if (loading) {
         return;
@@ -55,6 +56,25 @@ const PlaceOrder = () => {
                 })
         }
     }
+
+    const handleOrderQuantity = event => {
+        event.preventDefault();
+        const orderQuantity = parseInt(event.target.value);
+
+        if (orderQuantity < parseInt(minimumOrderQuantity)) {
+            setErrorMessage(`Minimum Order Quantity is ${minimumOrderQuantity}`);
+            setDisable(true);
+        }
+        else if (orderQuantity > parseInt(availableQuantity)) {
+            setErrorMessage(`Maximum Order Quantity is ${availableQuantity}`);
+            setDisable(true);
+        }
+        else {
+            setErrorMessage('');
+            setDisable(false);
+        }
+    }
+
     return (
         <div className='w-50 mx-auto my-5 py-2'>
             <PageTitle title="Place Order" />
@@ -76,7 +96,7 @@ const PlaceOrder = () => {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="quantity" className="form-label">Order Quantity</label>
-                    <input type="number" name="quantity" className="form-control" id="quantity" aria-describedby="quantityHelp" placeholder='Please Enter Quantity' onFocus={() => setErrorMessage('')} onWheel={event => event.target.blur()} defaultValue={minimumOrderQuantity} required />
+                    <input type="number" name="quantity" className="form-control" id="quantity" aria-describedby="quantityHelp" placeholder='Please Enter Quantity' onWheel={event => event.target.blur()} onChange={handleOrderQuantity} defaultValue={minimumOrderQuantity} required />
 
                 </div>
                 <div className="mb-3">
@@ -89,7 +109,7 @@ const PlaceOrder = () => {
                 </div>
                 {errorMessage && <p className="text-danger">{errorMessage}</p>}
                 {orderPlaced && <p>Your order is placed successfully. <Link to='/dashboard/myOrders' className='text-decoration-none'>See your orders</Link></p>}
-                <input className='btn btn-secondary d-block w-50 mx-auto mt-2' type="submit" value='PlaceOrder' disabled={errorMessage} />
+                <input className='btn btn-secondary d-block w-50 mx-auto mt-2' type="submit" value='PlaceOrder' disabled={disable} />
             </form>
         </div>
     );
