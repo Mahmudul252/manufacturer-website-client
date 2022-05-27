@@ -14,7 +14,7 @@ const Tool = ({ showTool }) => {
                 <div className="fw-bold">
                     <p className='m-0'>Minimum Order Quantity: {minimumOrderQuantity}</p>
                     <p className='m-0'>Available Quantity: {availableQuantity}</p>
-                    <p className='m-0'>Unit Price: {unitPrice}</p>
+                    <p className='m-0'>Unit Price: ${unitPrice}</p>
                 </div>
             </Card.Body>
             <Card.Footer className='border-0 bg-white'>

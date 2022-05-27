@@ -1,12 +1,15 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useState, useEffect } from 'react';
 
-const CheckoutForm = ({ totalPrice }) => {
+const CheckoutForm = ({ selectedOrder }) => {
     const stripe = useStripe();
     const elements = useElements();
     const [cardError, setCardError] = useState('');
     const [clientSecret, setClientSecret] = useState('');
-    console.log(totalPrice);
+    const [success, setSuccess] = useState('');
+    const [transactionId, setTransactionId] = useState('');
+    const { _id, totalPrice: price, userEmail, userName } = selectedOrder || {};
+    const totalPrice = parseInt(price);
 
 
     useEffect(() => {
@@ -21,8 +24,6 @@ const CheckoutForm = ({ totalPrice }) => {
             .then(data => {
                 if (data?.clientSecret) {
                     setClientSecret(data.clientSecret);
-                    console.log(data);
-
                 }
             });
     }, [totalPrice]);
@@ -44,7 +45,39 @@ const CheckoutForm = ({ totalPrice }) => {
         });
 
         setCardError(error?.message || '');
-
+        setSuccess('');
+        const { paymentIntent, error: intentError } = await stripe.confirmCardPayment(
+            clientSecret,
+            {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: userName,
+                        email: userEmail
+                    },
+                },
+            },
+        );
+        if (intentError) {
+            setCardError(intentError.message);
+            setSuccess('');
+        }
+        else {
+            setCardError('');
+            fetch(`http://localhost:5000/orders/${_id}`, {
+                method: "PUT",
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({ paid: true })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    setSuccess('Payment successful!');
+                    setTransactionId(paymentIntent.id);
+                });
+        }
     }
 
     return (
@@ -69,8 +102,11 @@ const CheckoutForm = ({ totalPrice }) => {
                 Pay
             </button>
             {cardError && <p className="text-danger mt-2 mb-0">{cardError}</p>}
+            {success &&
+                <p className="text-success mt-2 mb-0">{success} <br />
+                    Your transaction Id is {transactionId}
+                </p>}
         </form>
     );
 };
-
 export default CheckoutForm;

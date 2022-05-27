@@ -21,17 +21,17 @@ const Payment = () => {
     if (loading) {
         return <Loading />
     }
-    const { orderQuantity, phone, toolName, totalPrice: price, userEmail, userName, address } = selectedOrder || {};
-    const totalPrice = parseInt(price);
+    const { toolName, totalPrice } = selectedOrder || {};
 
     return (
         <div className='w-50 mx-auto'>
             <PageTitle title="Payment" />
             <Card>
                 <Card.Body>
-                    <Card.Title>Please Pay for {toolName}</Card.Title>
+                    <Card.Title className='mt-3'>Please Pay for <i>{toolName}</i></Card.Title>
+                    <p className="mb-3">Payable amount: ${totalPrice}</p>
                     <Elements stripe={stripePromise}>
-                        <CheckoutForm totalPrice={totalPrice} />
+                        <CheckoutForm selectedOrder={selectedOrder} />
                     </Elements>
                 </Card.Body>
             </Card>

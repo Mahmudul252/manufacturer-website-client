@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const MyOrder = ({ userOrder, index, handleCancelOrder, handlePayOrder }) => {
-    const { _id, toolName, orderQuantity, totalPrice } = userOrder;
+const MyOrder = ({ userOrder, index, handleCancelOrder }) => {
+    const { _id, toolName, orderQuantity, totalPrice, paid } = userOrder;
+    console.log(paid, userOrder)
     return (
         <tr>
             <td>{index + 1}</td>
@@ -10,10 +11,18 @@ const MyOrder = ({ userOrder, index, handleCancelOrder, handlePayOrder }) => {
             <td>{orderQuantity}</td>
             <td>${totalPrice}</td>
             <td>
-                <Link to={`/dashboard/payment/${_id}`} className="btn btn-success me-3">Pay</Link>
-                <button onClick={() => handleCancelOrder(_id)} className="btn btn-danger ">Delete</button>
+
+                {
+                    paid ?
+                        <p className="m-0 fw-bold">Paid</p>
+                        :
+                        <>
+                            <Link to={`/dashboard/payment/${_id}`} className=" btn btn-secondary me-3">Pay</Link>
+                            <button onClick={() => handleCancelOrder(_id)} className="btn btn-danger">Delete</button>
+                        </>
+                }
             </td>
-        </tr>
+        </tr >
     );
 };
 

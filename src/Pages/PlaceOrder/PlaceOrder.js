@@ -22,7 +22,7 @@ const PlaceOrder = () => {
     const selectedTool = tools?.find(tool => tool._id === id);
     const { _id, name, minimumOrderQuantity, availableQuantity, unitPrice } = selectedTool || {};
 
-    const handlePurchaseOrder = event => {
+    const handlePlaceOrder = event => {
         event.preventDefault();
         const quantity = event.target.quantity.value;
         const phone = event.target.phone.value;
@@ -39,7 +39,7 @@ const PlaceOrder = () => {
         }
         else {
             setErrorMessage('');
-            const order = { toolName: name, userName: user.displayName, userEmail: user.email, phone, orderId: _id, orderQuantity: quantity, address, totalPrice: JSON.stringify(quantity * unitPrice) };
+            const order = { toolName: name, userName: user.displayName, userEmail: user.email, phone, paid: false, orderQuantity: quantity, address, totalPrice: JSON.stringify(quantity * unitPrice) };
 
             fetch('http://localhost:5000/orders', {
                 method: "POST",
@@ -85,7 +85,7 @@ const PlaceOrder = () => {
                 <small className="m-0 text-center">Unit Price: ${unitPrice}</small>
             </p>
 
-            <form onSubmit={handlePurchaseOrder}>
+            <form onSubmit={handlePlaceOrder}>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">Name</label>
                     <input type="text" className="form-control" id="name" aria-describedby="nameHelp" defaultValue={`${user.displayName}`} readOnly disabled />
