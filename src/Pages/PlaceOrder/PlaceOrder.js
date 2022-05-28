@@ -20,7 +20,7 @@ const PlaceOrder = () => {
         return;
     }
     const selectedTool = tools?.find(tool => tool._id === id);
-    const { _id, name, minimumOrderQuantity, availableQuantity, unitPrice } = selectedTool || {};
+    const { name, minimumOrderQuantity, availableQuantity, unitPrice } = selectedTool || {};
 
     const handlePlaceOrder = event => {
         event.preventDefault();
