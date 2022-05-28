@@ -1,7 +1,7 @@
 import React from 'react';
 
-const ManageOrder = ({ userOrder, index, handleApproveOrder, handleCancelOrder }) => {
-    const { _id, userName, toolName, totalPrice, paymentStatus, shippingStatus } = userOrder;
+const ManageOrder = ({ order, index, handleApproveOrder, handleCancelOrder }) => {
+    const { _id, userName, toolName, totalPrice, paymentStatus, shippingStatus } = order;
     return (
         <tr>
             <td>{index + 1}</td>
@@ -17,7 +17,7 @@ const ManageOrder = ({ userOrder, index, handleApproveOrder, handleCancelOrder }
                 {
                     (paymentStatus === 'Paid' && shippingStatus === 'pending' && <button className='btn btn-success w-75' onClick={() => handleApproveOrder(_id)}>Approve</button>)
                     ||
-                    (paymentStatus === 'Paid' && shippingStatus === 'shipped' && 'Delivered')
+                    (paymentStatus === 'Paid' && shippingStatus === 'shipped' && <span className='fw-bold'>Delivered</span>)
                     ||
                     <button className='btn btn-danger w-75' onClick={() => handleCancelOrder(_id)}>Cancel Order</button>
                 }

@@ -47,8 +47,27 @@ const ManageOrders = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount > 0) {
+                    const selectedOrder = allOrders.find(order => order._id === _id);
+                    const remainingOrders = allOrders.filter(order => order._id !== _id);
+                    selectedOrder.shippingStatus = 'shipped';
+                    setAllOrders([...remainingOrders, selectedOrder]);
                     setAdminLoading(false);
                     toast.success('Order Approved Successfully!');
+                }
+            })
+    }
+    const handleCancelOrder = _id => {
+        setAdminLoading(true);
+        fetch(`http://localhost:5000/orders/${_id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    const remainingOrders = allOrders.filter(order => order._id !== _id);
+                    setAllOrders(remainingOrders);
+                    setAdminLoading(false);
+                    toast.success('Order Cancelled Successfully!');
                 }
             })
     }
@@ -71,11 +90,12 @@ const ManageOrders = () => {
                         </thead>
                         <tbody>
                             {
-                                orders.map((userOrder, index) => <ManageOrder
+                                allOrders.map((order, index) => <ManageOrder
                                     key={index}
-                                    userOrder={userOrder}
+                                    order={order}
                                     index={index}
                                     handleApproveOrder={handleApproveOrder}
+                                    handleCancelOrder={handleCancelOrder}
                                 ></ManageOrder>)
                             }
                         </tbody>
