@@ -39,7 +39,7 @@ const PlaceOrder = () => {
         }
         else {
             setErrorMessage('');
-            const order = { toolName: name, userName: user.displayName, userEmail: user.email, phone, paid: false, orderQuantity: quantity, address, totalPrice: JSON.stringify(quantity * unitPrice) };
+            const order = { toolName: name, userName: user.displayName, userEmail: user.email, phone, paymentStatus: 'Unpaid', orderQuantity: quantity, address, totalPrice: JSON.stringify(quantity * unitPrice) };
 
             fetch('http://localhost:5000/orders', {
                 method: "POST",

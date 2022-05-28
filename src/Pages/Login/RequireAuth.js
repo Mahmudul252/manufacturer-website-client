@@ -8,7 +8,6 @@ const RequireAuth = ({ children }) => {
     const location = useLocation();
 
     if (!user) {
-        localStorage.removeItem('accessToken');
         return <Navigate to='/login' state={{ from: location }} replace />
     }
     return children;

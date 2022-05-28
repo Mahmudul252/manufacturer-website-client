@@ -7,7 +7,7 @@ import auth from '../../firebase.init';
 
 const Header = () => {
     const [user] = useAuthState(auth);
-    console.log(user)
+    // console.log(user)
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" className='fixed-top' variant="dark">
             <Container>

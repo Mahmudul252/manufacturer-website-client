@@ -69,7 +69,7 @@ const CheckoutForm = ({ selectedOrder }) => {
                 headers: {
                     'content-type': 'application/json'
                 },
-                body: JSON.stringify({ paid: true })
+                body: JSON.stringify({ paymentStatus: 'Paid', shippingStatus: 'pending' })
             })
                 .then(res => res.json())
                 .then(data => {

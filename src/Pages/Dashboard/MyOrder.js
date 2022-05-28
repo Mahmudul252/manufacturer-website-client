@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const MyOrder = ({ userOrder, index, handleCancelOrder }) => {
-    const { _id, toolName, orderQuantity, totalPrice, paid } = userOrder;
-    console.log(paid, userOrder)
+    const { _id, toolName, orderQuantity, totalPrice, paymentStatus } = userOrder;
     return (
         <tr>
             <td>{index + 1}</td>
@@ -13,7 +12,7 @@ const MyOrder = ({ userOrder, index, handleCancelOrder }) => {
             <td>
 
                 {
-                    paid ?
+                    paymentStatus === 'Paid' ?
                         <p className="m-0 fw-bold">Paid</p>
                         :
                         <>
