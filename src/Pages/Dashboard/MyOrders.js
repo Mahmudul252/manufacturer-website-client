@@ -26,7 +26,7 @@ const MyOrders = () => {
     const handleCancelOrder = _id => {
         const proceed = window.confirm('Are you sure to cancel the order?');
         if (proceed) {
-            fetch(`http://localhost:5000/orders/${_id}`, {
+            fetch(`https://lit-journey-03392.herokuapp.com/orders/${_id}`, {
                 method: "DELETE"
             })
                 .then(res => res.json())

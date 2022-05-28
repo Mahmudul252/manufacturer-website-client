@@ -8,7 +8,7 @@ const useOrders = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch('http://localhost:5000/orders', {
+        fetch('https://lit-journey-03392.herokuapp.com/orders', {
             method: 'GET',
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`

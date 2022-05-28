@@ -39,7 +39,7 @@ const ManageProducts = () => {
         const proceed = window.confirm('Are you sure to delete?');
         if (proceed) {
             setAdminLoading(true);
-            fetch(`http://localhost:5000/tools/${_id}`, {
+            fetch(`https://lit-journey-03392.herokuapp.com/tools/${_id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())

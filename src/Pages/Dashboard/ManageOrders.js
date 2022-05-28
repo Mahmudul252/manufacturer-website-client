@@ -37,7 +37,7 @@ const ManageOrders = () => {
     }
     const handleApproveOrder = _id => {
         setAdminLoading(true);
-        fetch(`http://localhost:5000/orders/${_id}`, {
+        fetch(`https://lit-journey-03392.herokuapp.com/orders/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -60,7 +60,7 @@ const ManageOrders = () => {
         const proceed = window.confirm('Are you sure to cancel?');
         if (proceed) {
             setAdminLoading(true);
-            fetch(`http://localhost:5000/orders/${_id}`, {
+            fetch(`https://lit-journey-03392.herokuapp.com/orders/${_id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())

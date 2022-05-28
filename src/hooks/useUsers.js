@@ -13,7 +13,7 @@ const useUsers = () => {
     useEffect(() => {
         if (token) {
             setLoading(true);
-            fetch('http://localhost:5000/users', {
+            fetch('https://lit-journey-03392.herokuapp.com/users', {
                 method: 'GET',
                 headers: {
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`

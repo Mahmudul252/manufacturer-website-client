@@ -13,7 +13,7 @@ const CheckoutForm = ({ selectedOrder }) => {
 
 
     useEffect(() => {
-        totalPrice && fetch('http://localhost:5000/create-payment-intents', {
+        totalPrice && fetch('https://lit-journey-03392.herokuapp.com/create-payment-intents', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -64,7 +64,7 @@ const CheckoutForm = ({ selectedOrder }) => {
         }
         else {
             setCardError('');
-            fetch(`http://localhost:5000/orders/${_id}`, {
+            fetch(`https://lit-journey-03392.herokuapp.com/orders/${_id}`, {
                 method: "PUT",
                 headers: {
                     'content-type': 'application/json'
@@ -73,7 +73,6 @@ const CheckoutForm = ({ selectedOrder }) => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
                     setSuccess('Payment successful!');
                     setTransactionId(paymentIntent.id);
                 });

@@ -17,7 +17,6 @@ const Dashboard = () => {
         setLoggedInUser(users.find(u => u.userEmail === user.email));
     }, [users, user.email]);
 
-    console.log(users);
     if (loading) {
         return <Loading />;
     }

@@ -53,13 +53,11 @@ const AddProduct = () => {
             .then(result => {
                 if (result.success) {
                     img = result.data.url;
-                    console.log(img);
                 }
             });
         const addedProduct = { img, name, minimumOrderQuantity, availableQuantity, description, unitPrice };
-        console.log(addedProduct);
 
-        fetch('http://localhost:5000/tools', {
+        fetch('https://lit-journey-03392.herokuapp.com/tools', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'

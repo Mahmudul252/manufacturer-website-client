@@ -60,7 +60,7 @@ const SignUp = () => {
                 const registeredUser = users?.find(u => u.email === userEmail);
                 if (!registeredUser) {
                     const newUser = { userName: displayName, userEmail, userPhoto: img };
-                    fetch('http://localhost:5000/users', {
+                    fetch('https://lit-journey-03392.herokuapp.com/users', {
                         method: "POST",
                         headers: {
                             'content-type': 'application/json'

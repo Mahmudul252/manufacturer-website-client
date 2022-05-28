@@ -6,7 +6,7 @@ const useTools = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch('http://localhost:5000/tools')
+        fetch('https://lit-journey-03392.herokuapp.com/tools')
             .then(res => res.json())
             .then(data => {
                 setLoading(false);

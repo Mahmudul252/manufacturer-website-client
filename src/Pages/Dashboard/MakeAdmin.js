@@ -40,7 +40,7 @@ const MakeAdmin = () => {
 
         if (proceed) {
             setAdminLoading(true);
-            const url = `http://localhost:5000/users/${_id}`;
+            const url = `https://lit-journey-03392.herokuapp.com/users/${_id}`;
             fetch(url, {
                 method: "PUT",
                 headers: {
@@ -50,7 +50,6 @@ const MakeAdmin = () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
                     const restUsers = updatedUsers.filter(updatedUser => updatedUser._id !== _id);
                     selectedUser.role = 'Admin';
                     setUpdatedUsers([...restUsers, selectedUser]);

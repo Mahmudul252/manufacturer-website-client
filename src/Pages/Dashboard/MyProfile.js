@@ -32,7 +32,7 @@ const MyProfile = () => {
         const education = event.target.education.value;
         const userProfileInfo = { location, linkedIn, education, phone };
 
-        const url = `http://localhost:5000/users/${loggedInUser._id}`;
+        const url = `https://lit-journey-03392.herokuapp.com/users/${loggedInUser._id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

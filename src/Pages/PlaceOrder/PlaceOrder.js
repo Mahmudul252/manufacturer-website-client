@@ -41,7 +41,7 @@ const PlaceOrder = () => {
             setErrorMessage('');
             const order = { toolName: name, userName: user.displayName, userEmail: user.email, phone, paymentStatus: 'Unpaid', orderQuantity: quantity, address, totalPrice: JSON.stringify(quantity * unitPrice) };
 
-            fetch('http://localhost:5000/orders', {
+            fetch('https://lit-journey-03392.herokuapp.com/orders', {
                 method: "POST",
                 headers: {
                     'content-type': 'application/json'

@@ -42,7 +42,7 @@ const SocialSignIn = ({ from }) => {
             const registeredUser = users?.find(u => u.userEmail === userEmail);
             if (!registeredUser) {
                 const newUser = { userName, userEmail, userPhoto };
-                fetch('http://localhost:5000/users', {
+                fetch('https://lit-journey-03392.herokuapp.com/users', {
                     method: "POST",
                     headers: {
                         'content-type': 'application/json'

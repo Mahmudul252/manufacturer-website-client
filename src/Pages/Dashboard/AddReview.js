@@ -22,7 +22,7 @@ const AddReview = () => {
         const userName = user.displayName;
         const userPhoto = user.photoURL;
         const userReview = { review, ratings, userName, img: userPhoto };
-        fetch('http://localhost:5000/reviews', {
+        fetch('https://lit-journey-03392.herokuapp.com/reviews', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -34,7 +34,6 @@ const AddReview = () => {
                 toast.success('Review added!');
                 event.target.reset();
                 setReviewLoading(false);
-                console.log(data)
             })
     }
     return (
