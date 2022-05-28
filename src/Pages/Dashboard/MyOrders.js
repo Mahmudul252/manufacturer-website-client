@@ -15,7 +15,7 @@ const MyOrders = () => {
     const [userOrders, setUserOrders] = useState([]);
 
     useEffect(() => {
-        setUserOrders(orders?.filter(order => order.userEmail === user.email));
+        orders.length && setUserOrders(orders?.filter(order => order.userEmail === user.email));
     }, [orders, user.email]);
 
     if (loading) {

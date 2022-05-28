@@ -9,6 +9,7 @@ import SocialSignIn from './SocialLogin';
 import Loading from '../Shared/Loading';
 import PageTitle from '../Shared/PageTitle';
 import useToken from '../../hooks/useToken';
+import { signOut } from 'firebase/auth';
 
 const Login = () => {
     const location = useLocation();

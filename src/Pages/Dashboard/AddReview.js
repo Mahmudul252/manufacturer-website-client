@@ -38,7 +38,7 @@ const AddReview = () => {
             })
     }
     return (
-        <div>
+        <div className='w-50 mx-auto'>
             <PageTitle title="Add Review" />
             <h2 className="display-6">Add a Review</h2>
             <Form onSubmit={handleAddReview}>
