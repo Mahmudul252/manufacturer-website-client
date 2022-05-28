@@ -74,7 +74,7 @@ const ManageOrders = () => {
     return (
         <div>
             <PageTitle title="Manage Orders" />
-            <h2>Manage All Orders</h2>
+            <h2 className='text-center'>Manage All Orders</h2>
             {
                 allOrders.length ?
                     <Table striped bordered hover variant="dark" className='text-center' style={{ width: '90%' }} >

@@ -50,6 +50,7 @@ const MakeAdmin = () => {
             })
                 .then(res => res.json())
                 .then(data => {
+                    console.log(data);
                     const restUsers = updatedUsers.filter(updatedUser => updatedUser._id !== _id);
                     selectedUser.role = 'Admin';
                     setUpdatedUsers([...restUsers, selectedUser]);

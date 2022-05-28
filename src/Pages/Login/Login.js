@@ -22,15 +22,14 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
     const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
-    const [user, userLoading] = useAuthState(auth);
-    const [token] = useToken(user);
+    const [token] = useToken();
     const from = location?.state?.from?.pathname || '/';
 
     useEffect(() => {
         token && navigate(from, { replace: true });
     }, [from, navigate, token]);
 
-    if (loading || userLoading) {
+    if (loading) {
         return <Loading></Loading>;
     }
 

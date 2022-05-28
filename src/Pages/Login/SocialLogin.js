@@ -26,7 +26,7 @@ const SocialSignIn = ({ from }) => {
     }
     useEffect(() => {
         const loggedInUser = googleUser || githubUser;
-        if (loggedInUser) {
+        if (loggedInUser && users?.length) {
             let userName, userEmail, userPhoto;
             if (googleUser) {
                 userName = googleUser.user.displayName;

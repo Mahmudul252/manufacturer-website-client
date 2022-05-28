@@ -33,10 +33,6 @@ const SignUp = () => {
         return <Loading />
     }
 
-
-
-
-
     const onSubmit = ({ userEmail, userName: displayName, userPassword, userPhoto }) => {
         setSignUpLoading(true);
         let img;
